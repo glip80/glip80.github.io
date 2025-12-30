@@ -7,15 +7,11 @@ export const useAnalytics = () => {
             const res = await fetch('https://ipapi.co/json/');
             const data = await res.json();
             const ip = data.ip;
-            const location = `${data.city}, ${data.country_name}`;
-
-            // Append location to details
-            const finalDetails = details ? `${details} | ${location}` : location;
 
             const { error } = await supabase
                 .from('visits')
                 .insert([
-                    { ip, action, details: finalDetails }
+                    { ip, action, details: details, city: data.city, country: data.country_name }
                 ]);
 
             if (error) {
