@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "preview",
+            "group": "none",
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "vite preview",
+                    "endsPattern": "Local:"
+                }
+            },
+            "label": "npm: preview",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "group": "build",
+            "problemMatcher": [],
+            "label": "npm: build",
+            "detail": "tsc -b && vite build"
+        }
+    ]
+}

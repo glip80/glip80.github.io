@@ -1,16 +1,60 @@
-## Hi there 👋
+# Alexander Polyakov - Developer Profile
 
-<!--
-**glip80/glip80** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+This repository hosts the personal developer portfolio website for Alexander Polyakov (@glip80), built with React, TypeScript, and Vite.
 
-Here are some ideas to get you started:
+## Prerequisites
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [npm](https://www.npmjs.com/) (Included with Node.js)
+
+## Getting Started
+
+Follow these steps to set up the project locally.
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Run Development Server
+
+Start the local development server with hot-reload:
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5173` to view the app.
+
+### 3. Build for Production
+
+Build the project for deployment:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist` directory.
+
+### 4. Preview Production Build
+
+To locally preview the production build:
+
+```bash
+npm run preview
+```
+
+Visit `http://localhost:4173` to view the production build.
+
+## VS Code Configuration
+
+This project includes VS Code configurations for a smoother development experience.
+
+- **Launch Preview**: You can use the "Run and Debug" side bar to launch the preview server and open it in Chrome automatically. This requires the project to be built first (`npm run build`).
+
+## Deployment
+
+This project is configured to deploy to **GitHub Pages** using GitHub Actions.
+
+For detailed instructions on domain configuration and deployment verification, please refer to the [Deployment Guide](deployment_guide.md).
