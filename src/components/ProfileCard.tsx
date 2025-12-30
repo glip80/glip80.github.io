@@ -81,7 +81,6 @@ export const ProfileCard = () => {
 
                     <motion.div variants={item} className="profile-info">
                         <h1 className="name">Alexander Polyakov</h1>
-                        <p className="handle">@glip80</p>
                         <p className="bio">Software Developer. Passionate about building modern web experiences.</p>
 
                         <div className="meta-info">
@@ -166,21 +165,6 @@ export const ProfileCard = () => {
                             )}
                         </AnimatePresence>
                     </a>
-
-                    <div className="music-widget">
-                        <div className="music-icon">
-                            <Music size={16} />
-                        </div>
-                        <div className="music-info">
-                            <span className="music-status">Coding Vibe</span>
-                            <div className="visualizer">
-                                <div className="bar"></div>
-                                <div className="bar"></div>
-                                <div className="bar"></div>
-                                <div className="bar"></div>
-                            </div>
-                        </div>
-                    </div>
                 </motion.div>
             </motion.div>
         </Tilt>
