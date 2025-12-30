@@ -20,6 +20,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3.0.0
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3.0.0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -30,14 +41,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Set version from package.json
+      - name: Set version from GitVersion
         run: node scripts/set-version.mjs
         env:
           VITE_GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
           VITE_ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          VITE_BUILD_VERSION: ${{ steps.gitversion.outputs.semVer }}
 
       - name: Build
         run: npm run build
+        env:
+          VITE_BUILD_VERSION: ${{ steps.gitversion.outputs.semVer }}
+
+      - name: Create Git Tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git tag v${{ steps.gitversion.outputs.semVer }}
+          git push origin v${{ steps.gitversion.outputs.semVer }}
+
+      - name: Job Summary
+        if: always()
+        run: |
+          echo "## Build Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Version** | ${{ steps.gitversion.outputs.semVer }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Tag** | v${{ steps.gitversion.outputs.semVer }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Branch** | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Actor** | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Status** | ${{ job.status }} |" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
