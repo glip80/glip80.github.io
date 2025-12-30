@@ -22,12 +22,19 @@ function App() {
         trackVisit('page_view', location.pathname);
     }, [location]);
 
+    const buildVersion = import.meta.env.VITE_BUILD_VERSION;
+
     return (
         <div className="app-container">
             <Routes>
                 <Route path="/" element={<ProfileCard />} />
                 <Route path="/admin" element={<Admin />} />
             </Routes>
+            {buildVersion && (
+                <div className="version-badge">
+                    v{buildVersion}
+                </div>
+            )}
         </div>
     )
 }
