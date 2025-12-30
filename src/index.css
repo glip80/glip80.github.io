@@ -197,6 +197,11 @@ body {
   background: linear-gradient(45deg, rgba(36, 41, 46, 0.5), rgba(36, 41, 46, 0.8));
 }
 
+.action-btn.twitter {
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .action-btn.linkedin {
   background: linear-gradient(45deg, rgba(0, 119, 181, 0.2), rgba(0, 119, 181, 0.4));
   border-color: rgba(0, 119, 181, 0.3);

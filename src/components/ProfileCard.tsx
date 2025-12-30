@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Twitter } from 'lucide-react';
 
 export const ProfileCard = () => {
     const container = {
@@ -70,9 +70,20 @@ export const ProfileCard = () => {
                 </a>
 
                 <a
-                    href="#"
+                    href="https://x.com/Glip80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="action-btn twitter"
+                >
+                    <Twitter size={20} />
+                    <span>X (Twitter)</span>
+                    <ExternalLink size={14} className="external-icon" />
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/alexpolyakov/"
+                    target="_blank"
                     className="action-btn linkedin"
-                    onClick={(e) => { e.preventDefault(); alert('LinkedIn not provided yet'); }}
                 >
                     <Linkedin size={20} />
                     <span>LinkedIn</span>
@@ -80,7 +91,7 @@ export const ProfileCard = () => {
                 </a>
 
                 <a
-                    href="mailto:gllip80@gmail.com"
+                    href="mailto:gllip80@gmail.com?subject=From%20bio&body=Dear%20Alexander,%0A%0A%20I%20am%20writing%20to%20you%20from%20your%20bio.%0A%0ARegards,%20[Your%20Name]"
                     className="action-btn email"
                 >
                     <Mail size={20} />
