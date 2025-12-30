@@ -82,6 +82,7 @@ export const ProfileCard = () => {
 
                 <a
                     href="https://www.linkedin.com/in/alexpolyakov/"
+                    target="_blank"
                     className="action-btn linkedin"
                 >
                     <Linkedin size={20} />
@@ -90,7 +91,7 @@ export const ProfileCard = () => {
                 </a>
 
                 <a
-                    href="mailto:gllip80@gmail.com"
+                    href="mailto:gllip80@gmail.com?subject=From%20bio&body=Dear%20Alexander,%0A%0A%20I%20am%20writing%20to%20you%20from%20your%20bio.%0A%0ARegards,%20[Your%20Name]"
                     className="action-btn email"
                 >
                     <Mail size={20} />
