@@ -6,7 +6,10 @@ import { useEffect } from 'react';
 import ReactGA from "react-ga4";
 
 // Initialize Google Analytics
-ReactGA.initialize("G-354MNC11N2");
+const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+if (GA_ID) {
+    ReactGA.initialize(GA_ID);
+}
 
 function App() {
     const { trackVisit } = useAnalytics();

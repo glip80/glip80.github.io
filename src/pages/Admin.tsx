@@ -15,7 +15,7 @@ export const Admin = () => {
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         // Simple client-side protection
-        if (password === 'glip80') {
+        if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
             setIsAuthenticated(true);
             // Will fetch via useEffect when page/pageSize changes
         } else {
