@@ -44,7 +44,7 @@ export const ProfileCard = () => {
                 <motion.div variants={item} className="profile-info">
                     <h1 className="name">Alexander Polyakov</h1>
                     <p className="handle">@glip80</p>
-                    <p className="bio">Full Stack Developer. Passionate about building modern web experiences.</p>
+                    <p className="bio">Software Developer. Passionate about building modern web experiences.</p>
 
                     <div className="meta-info">
                         <span className="meta-item">
