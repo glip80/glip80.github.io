@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
 export const useAnalytics = () => {
@@ -25,7 +24,7 @@ export const useAnalytics = () => {
         } catch (error) {
             console.error('Analytics error:', error);
             // Fallback if IP API fails
-            const { error: dbError } = await supabase
+            await supabase
                 .from('visits')
                 .insert([
                     { ip: 'unknown', action, details: details || 'Location fetch failed' }
