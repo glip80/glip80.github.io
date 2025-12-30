@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
+import { useAnalytics } from '../hooks/useAnalytics';
 import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Twitter, Clock, Copy, Check, Music, Code2, Terminal, Cpu, Box, Brain } from 'lucide-react';
 
 export const ProfileCard = () => {
+    const { trackVisit } = useAnalytics();
     const [time, setTime] = useState('');
     const [copied, setCopied] = useState(false);
 
@@ -25,6 +27,7 @@ export const ProfileCard = () => {
 
     const handleCopyEmail = (e: React.MouseEvent) => {
         e.preventDefault();
+        trackVisit('copy_email', 'gllip80@gmail.com');
         navigator.clipboard.writeText('gllip80@gmail.com');
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -109,6 +112,7 @@ export const ProfileCard = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="action-btn github"
+                        onClick={() => trackVisit('link_click', 'GitHub')}
                     >
                         <Github size={20} />
                         <span>GitHub</span>
@@ -120,6 +124,7 @@ export const ProfileCard = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="action-btn twitter"
+                        onClick={() => trackVisit('link_click', 'Twitter')}
                     >
                         <Twitter size={20} />
                         <span>X (Twitter)</span>
@@ -130,6 +135,7 @@ export const ProfileCard = () => {
                         href="https://www.linkedin.com/in/alexpolyakov/"
                         target="_blank"
                         className="action-btn linkedin"
+                        onClick={() => trackVisit('link_click', 'LinkedIn')}
                     >
                         <Linkedin size={20} />
                         <span>LinkedIn</span>
