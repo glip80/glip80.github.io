@@ -144,6 +144,36 @@ body {
   margin: 0 auto;
 }
 
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.tech-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.tech-badge:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
 .meta-info {
   display: flex;
   gap: 1rem;
@@ -222,4 +252,125 @@ body {
   display: flex;
   justify-content: center;
   padding: 1rem;
+}
+
+/* New Feature Styles */
+
+.location-time {
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--accent);
+}
+
+.tooltip-copied {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #22c55e;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.copy-btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  margin-left: auto;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.action-btn:hover .copy-btn-icon {
+  opacity: 1;
+}
+
+/* Music Widget */
+.music-widget {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
+}
+
+.music-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1DB954;
+  /* Spotify Green */
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.music-status {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 12px;
+}
+
+.bar {
+  width: 3px;
+  background: #1DB954;
+  border-radius: 2px;
+  animation: equalize 1s infinite alternate;
+}
+
+.bar:nth-child(1) {
+  height: 60%;
+  animation-delay: -0.4s;
+}
+
+.bar:nth-child(2) {
+  height: 100%;
+  animation-delay: -0.2s;
+}
+
+.bar:nth-child(3) {
+  height: 80%;
+  animation-delay: -0.6s;
+}
+
+.bar:nth-child(4) {
+  height: 50%;
+  animation-delay: -0.8s;
+}
+
+@keyframes equalize {
+  0% {
+    height: 20%;
+  }
+
+  100% {
+    height: 100%;
+  }
 }
