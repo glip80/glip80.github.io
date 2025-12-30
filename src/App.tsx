@@ -28,7 +28,7 @@ function App() {
         <div className="app-container">
             <Routes>
                 <Route path="/" element={<ProfileCard />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/analytics" element={<Admin />} />
             </Routes>
             {buildVersion && (
                 <div className="version-badge">
