@@ -8,6 +8,7 @@ export const ProfileCard = () => {
     const { trackVisit } = useAnalytics();
     const [time, setTime] = useState('');
     const [copied, setCopied] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         const updateTime = () => {
@@ -27,8 +28,8 @@ export const ProfileCard = () => {
 
     const handleCopyEmail = (e: React.MouseEvent) => {
         e.preventDefault();
-        trackVisit('copy_email', 'gllip80@gmail.com');
-        navigator.clipboard.writeText('gllip80@gmail.com');
+        trackVisit('copy_email', 'glip80@gmail.com');
+        navigator.clipboard.writeText('glip80@gmail.com');
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -53,23 +54,25 @@ export const ProfileCard = () => {
 
     return (
         <Tilt
-            tiltMaxAngleX={5}
-            tiltMaxAngleY={5}
-            scale={1.02}
+            tiltMaxAngleX={isExpanded ? 0 : 5}
+            tiltMaxAngleY={isExpanded ? 0 : 5}
+            scale={isExpanded ? 1 : 1.02}
             transitionSpeed={2000}
-            className="tilt-wrapper"
+            className={`tilt-wrapper ${isExpanded ? 'expanded' : ''}`}
         >
             <motion.div
-                className="profile-card"
+                className={`profile-card ${isExpanded ? 'expanded' : ''}`}
                 variants={container}
                 initial="hidden"
                 animate="visible"
+                layout
             >
                 <div className="profile-header">
                     <motion.div
                         className="avatar-container"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        layout
                     >
                         <img
                             src="https://github.com/glip80.png"
@@ -79,92 +82,116 @@ export const ProfileCard = () => {
                         <div className="status-indicator" title="Online" />
                     </motion.div>
 
-                    <motion.div variants={item} className="profile-info">
+                    <motion.div variants={item} className="profile-info" layout>
                         <h1 className="name">Alexander Polyakov</h1>
-                        <p className="bio">Software Developer. Passionate about building modern web experiences.</p>
+                        <h2 className="role-title">Backend Software Developer | Tech Lead</h2>
+                        <p className="bio">
+                            Senior Software Engineer with 20+ years of experience in backend infrastructure, big data, and cloud-native environments.
+                            Expert in designing high-availability solutions for FinTech and AdTech sectors.
+                        </p>
 
                         <div className="meta-info">
                             <span className="meta-item">
-                                <MapPin size={14} /> Global
-                            </span>
-                            <span className="meta-item">
-                                <Calendar size={14} /> Joined Github 2023
+                                <MapPin size={14} /> Herzliya, Israel
                             </span>
                             <span className="meta-item location-time">
                                 <Clock size={14} /> {time} (IL)
                             </span>
                         </div>
 
-                        <div className="tech-stack">
-                            <div className="tech-badge" title="React"><Code2 size={14} /> <span>React</span></div>
-                            <div className="tech-badge" title="TypeScript"><Terminal size={14} /> <span>TS</span></div>
-                            <div className="tech-badge" title="C#"><Box size={14} /> <span>C#</span></div>
-                            <div className="tech-badge" title="AI Models"><Brain size={14} /> <span>AI</span></div>
-                            <div className="tech-badge" title="Kubernetes"><Cpu size={14} /> <span>K8s</span></div>
-                        </div>
+                        {!isExpanded && (
+                            <div className="tech-stack">
+                                <div className="tech-badge"><Code2 size={14} /> <span>C#</span></div>
+                                <div className="tech-badge"><Code2 size={14} /> <span>Java</span></div>
+                                <div className="tech-badge"><Code2 size={14} /> <span>Scala</span></div>
+                                <div className="tech-badge"><Cpu size={14} /> <span>Azure/AWS</span></div>
+                                <div className="tech-badge"><Box size={14} /> <span>K8s</span></div>
+                            </div>
+                        )}
                     </motion.div>
                 </div>
 
-                <motion.div variants={item} className="actions">
-                    <a
-                        href="https://github.com/glip80"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="action-btn github"
-                        onClick={() => trackVisit('link_click', 'GitHub')}
-                    >
-                        <Github size={20} />
-                        <span>GitHub</span>
-                        <ExternalLink size={14} className="external-icon" />
-                    </a>
+                <AnimatePresence>
+                    {isExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="expanded-content"
+                        >
+                            <div className="section">
+                                <h3>Technical Skills</h3>
+                                <div className="skills-grid">
+                                    <div className="skill-category">
+                                        <h4>Languages</h4>
+                                        <div className="skill-tags">
+                                            <span>C#</span><span>Java</span><span>Scala</span><span>JavaScript</span><span>Python</span>
+                                        </div>
+                                    </div>
+                                    <div className="skill-category">
+                                        <h4>Cloud & DevOps</h4>
+                                        <div className="skill-tags">
+                                            <span>Azure</span><span>AWS</span><span>Docker</span><span>K8s (AKS)</span><span>Helm</span><span>CI/CD</span>
+                                        </div>
+                                    </div>
+                                    <div className="skill-category">
+                                        <h4>Data</h4>
+                                        <div className="skill-tags">
+                                            <span>SQL</span><span>MongoDB</span><span>Redis</span><span>Exasol</span><span>BigQuery</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-                    <a
-                        href="https://x.com/Glip80"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="action-btn twitter"
-                        onClick={() => trackVisit('link_click', 'Twitter')}
+                <motion.div variants={item} className="actions" layout>
+                    <button
+                        className="action-btn expand-btn"
+                        onClick={() => setIsExpanded(!isExpanded)}
                     >
-                        <Twitter size={20} />
-                        <span>X (Twitter)</span>
-                        <ExternalLink size={14} className="external-icon" />
-                    </a>
+                        {isExpanded ? 'Show Less' : 'View Full Profile'}
+                    </button>
 
-                    <a
-                        href="https://www.linkedin.com/in/alexpolyakov/"
-                        target="_blank"
-                        className="action-btn linkedin"
-                        onClick={() => trackVisit('link_click', 'LinkedIn')}
-                    >
-                        <Linkedin size={20} />
-                        <span>LinkedIn</span>
-                        <ExternalLink size={14} className="external-icon" />
-                    </a>
+                    <div className="social-links">
+                        <a
+                            href="https://github.com/glip80"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="action-btn github"
+                            onClick={() => trackVisit('link_click', 'GitHub')}
+                        >
+                            <Github size={20} />
+                        </a>
 
-                    <a
-                        href="mailto:gllip80@gmail.com"
-                        className="action-btn email"
-                        onClick={handleCopyEmail}
-                        style={{ position: 'relative' }}
-                    >
-                        {copied ? <Check size={20} /> : <Mail size={20} />}
-                        <span>{copied ? 'Copied!' : 'Email Me'}</span>
-                        <button className="copy-btn-icon" title="Copy to clipboard">
-                            <Copy size={16} />
-                        </button>
-                        <AnimatePresence>
-                            {copied && (
-                                <motion.span
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0 }}
-                                    className="tooltip-copied"
-                                >
-                                    Copied!
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </a>
+                        <a
+                            href="https://x.com/Glip80"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="action-btn twitter"
+                            onClick={() => trackVisit('link_click', 'Twitter')}
+                        >
+                            <Twitter size={20} />
+                        </a>
+
+                        <a
+                            href="https://www.linkedin.com/in/alexpolyakov/"
+                            target="_blank"
+                            className="action-btn linkedin"
+                            onClick={() => trackVisit('link_click', 'LinkedIn')}
+                        >
+                            <Linkedin size={20} />
+                        </a>
+
+                        <a
+                            href="mailto:glip80@gmail.com"
+                            className="action-btn email"
+                            onClick={handleCopyEmail}
+                        >
+                            {copied ? <Check size={20} /> : <Mail size={20} />}
+                        </a>
+                    </div>
                 </motion.div>
             </motion.div>
         </Tilt>
