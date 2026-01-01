@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { useAnalytics } from '../hooks/useAnalytics';
-import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Twitter, Clock, Copy, Check, Code2, Terminal, Cpu, Box, Brain } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Twitter, Clock, Check, Code2, Cpu, Box } from 'lucide-react';
 
 export const ProfileCard = () => {
     const { trackVisit } = useAnalytics();
