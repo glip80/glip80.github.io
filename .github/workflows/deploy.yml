@@ -49,9 +49,7 @@ jobs:
           VITE_BUILD_VERSION: ${{ steps.gitversion.outputs.semVer }}
 
       - name: Build
-        run: |
-          npm run build
-          cp dist/index.html dist/404.html
+        run: npm run build
         env:
           VITE_BUILD_VERSION: ${{ steps.gitversion.outputs.semVer }}
 
